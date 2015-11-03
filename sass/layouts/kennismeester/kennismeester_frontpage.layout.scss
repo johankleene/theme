@@ -1,0 +1,73 @@
+/*******************************************************************************
+ * _layout.scss
+ *
+ * Styling of the "simple" layout demonstrating the Compass grid extension Susy
+ * and building mobile first layouts.
+ ******************************************************************************/
+@import "../../utils";
+
+.l-header,
+.l-region--navigation {
+  @include container; // Define these elements as the grid containers.
+  // @include susy-grid-background; // Show the columns for debugging.
+}
+
+.l-main,
+.l-footer {
+  @include clearfix;
+  @include container; // Define these elements as the grid containers.
+  // @include susy-grid-background; // Show the columns for debugging.
+  margin-bottom: $vert-spacing-unit;
+}
+
+.l-region--highlighted,
+.l-region--help {
+  margin-bottom: $vert-spacing-unit;
+}
+
+.l-region--pre-body {
+  @include clearfix;
+}
+
+@include at-breakpoint($tab) { // At a given Susy Media Layout, use a given amount of columns.
+                               .l-header,
+                               .l-main,
+                               .l-footer {
+                                 @include set-container-width; // Reset only the container width (elements have already been declared as containers).
+                                 // @include susy-grid-background; // Show the columns for debugging.
+                               }
+
+                               .l-branding {
+                                 @include span-columns(4, 12); // Span 4 out of 12 columns.
+                               }
+                               .l-region--header{
+                                 @include span-columns(8 omega, 12); // Span the last (omega) 8 columns of 12.
+                               }
+                               .l-region--navigation {
+                                 clear: both;
+                               }
+                               .l-region--pre-body {
+                                 @include clearfix;
+                                 clear: both;
+                                 margin: 0 {
+                                   top: $vert-spacing-unit;
+                                   bottom: $vert-spacing-unit;
+                                 }
+                               }
+}
+
+@include at-breakpoint($desk) {
+  .l-header,
+  .l-main,
+  .l-footer {
+    @include set-container-width; // Reset only the container width (elements have already been declared as containers).
+    // @include susy-grid-background; // Show the columns for debugging.
+  }
+
+  .l-branding {
+    @include span-columns(6, 16); // Span 6 out of 16 columns.
+  }
+  .l-region--header{
+    @include span-columns(10 omega, 16); // Span the last (omega) 10 columns of 16.
+  }
+}
